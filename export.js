@@ -14446,6 +14446,7 @@ var restaurants =
       },
       "geometry": {
         "type": "Point",
+        "marker-color"="Red"
         "coordinates": [
           77.5633966,
           13.0289716

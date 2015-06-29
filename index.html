@@ -6,6 +6,7 @@
 <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
 <script src='https://api.tiles.mapbox.com/mapbox.js/v2.2.1/mapbox.js'></script>
 <script src="export.js" type="text/javascript"></script>
+<script src="style.js" type="text/javascript"></script>
 <link href='https://api.tiles.mapbox.com/mapbox.js/v2.2.1/mapbox.css' rel='stylesheet' />
 <link href='http://api.tiles.mapbox.com/v4/directions/{profile}/{waypoints}.json?access_token=pk.eyJ1IjoiamluYWxmb2ZsaWEiLCJhIjoiOE53X2toRSJ9.2aMeuYERrEvKHul16lAJjA' />
 <script src='https://api.tiles.mapbox.com/mapbox.js/plugins/mapbox-directions.js/v0.3.0/mapbox.directions.js'></script>
@@ -73,6 +74,18 @@ var map = L.mapbox.map('map', 'jinalfoflia.mi75cnia')
     .setView([12.9907, 77.6156], 11);
 var myLayer= L.mapbox.featureLayer().setGeoJSON(restaurants).addTo(map)
 
+myLayer.eachLayer(function (layer) {
+    layer.bindPopup('<strong>' + layer.feature.properties.name + '</strong>', { closeButton: false });
+  }).addTo(map);
+  myLayer.eachLayer(function (layer) {
+    layer.bindPopup(layer.feature.properties.name, { closeButton: false });
+  }).addTo(map);
+
+  // Open popups on hover
+  myLayer.on('mouseover', function (e) {
+    e.layer.openPopup();
+  });
+
 // move the attribution control out of the way
 map.attributionControl.setPosition('bottomleft');
 
@@ -95,6 +108,5 @@ var directionsRoutesControl = L.mapbox.directions.routesControl('routes', direct
 var directionsInstructionsControl = L.mapbox.directions.instructionsControl('instructions', directions)
     .addTo(map);
 </script>
-
 </body>
 </html>
